@@ -94,7 +94,7 @@ Query validation:
 ## Installation
 
 Clone the repository  
-git clone https://github.com/vicky-Github-1/educase.git
+git clone https://github.com/vicky-Github-1/School-management-API.git
 
 Install dependencies  
 npm install
