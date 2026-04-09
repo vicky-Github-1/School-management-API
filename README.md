@@ -22,7 +22,7 @@ A Node.js REST API built with Express and MySQL to manage schools and fetch scho
 
 ### 1. Add School
 
-POST `/api/addSchool`
+POST `/addSchool` (also available as `/api/addSchool`)
 
 Request Body:
 
@@ -39,11 +39,18 @@ Response:
 "message": "School added successfully"
 }
 
+Validation rules:
+
+- `name`: required, non-empty, max 255 chars
+- `address`: required, non-empty, max 500 chars
+- `latitude`: required, float between -90 and 90
+- `longitude`: required, float between -180 and 180
+
 ---
 
 ### 2. List Schools
 
-GET `/api/listSchools?latitude=28.6&longitude=77.2`
+GET `/listSchools?latitude=28.6&longitude=77.2` (also available as `/api/listSchools?...`)
 
 Response:
 
@@ -58,6 +65,11 @@ Response:
 }
 ]
 
+Query validation:
+
+- `latitude`: required, float between -90 and 90
+- `longitude`: required, float between -180 and 180
+
 ---
 
 ## Installation
@@ -65,10 +77,8 @@ Response:
 Clone the repository
 git clone https://github.com/vicky-Github-1/School-management-API.git
 
-
 Install dependencies
 npm install
-
 
 Create `.env` file
 DB_HOST=your_host
@@ -78,10 +88,19 @@ DB_NAME=railway
 DB_PORT=your_port
 PORT=5000
 
+Create table in MySQL
+Run the SQL from `schema.sql`, or execute:
+
+CREATE TABLE IF NOT EXISTS schools (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+address VARCHAR(500) NOT NULL,
+latitude FLOAT NOT NULL,
+longitude FLOAT NOT NULL
+);
 
 Run server
 npm run dev
-
 
 ---
 

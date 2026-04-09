@@ -1,0 +1,145 @@
+{
+  "info": {
+    "name": "School Management API",
+    "description": "Postman collection for School Management assignment APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "f5f3d286-16d7-4712-a851-90fa4362a7db"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Add School (Valid)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Sunrise Public School\",\n  \"address\": \"Sector 62, Noida\",\n  \"latitude\": 28.6284,\n  \"longitude\": 77.3649\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/addSchool",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "addSchool"
+          ]
+        },
+        "description": "Adds a new school with valid payload."
+      },
+      "response": []
+    },
+    {
+      "name": "Add School (Invalid Payload)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"address\": \"\",\n  \"latitude\": 120,\n  \"longitude\": 200\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/addSchool",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "addSchool"
+          ]
+        },
+        "description": "Should return 400 validation errors."
+      },
+      "response": []
+    },
+    {
+      "name": "List Schools (Valid Query)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/listSchools?latitude=28.6139&longitude=77.2090",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "listSchools"
+          ],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "28.6139"
+            },
+            {
+              "key": "longitude",
+              "value": "77.2090"
+            }
+          ]
+        },
+        "description": "Returns schools sorted by distance from user coordinates."
+      },
+      "response": []
+    },
+    {
+      "name": "List Schools (Missing Query)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/listSchools",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "listSchools"
+          ]
+        },
+        "description": "Should return 400 validation errors for missing latitude/longitude."
+      },
+      "response": []
+    },
+    {
+      "name": "List Schools via /api (Valid Query)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/listSchools?latitude=28.6139&longitude=77.2090",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "listSchools"
+          ],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "28.6139"
+            },
+            {
+              "key": "longitude",
+              "value": "77.2090"
+            }
+          ]
+        },
+        "description": "Backward-compatible route check for /api prefix."
+      },
+      "response": []
+    }
+  ]
+}
