@@ -1,3 +1,4 @@
+// calculate distance between two lat/lon points using Haversine formula
 export function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371;
 
